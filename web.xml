@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tc:web-app tc:id="webApp_9" tc:version="024"
+    xmlns:tc="http://www.epam.tc.com/web"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.epam.tc.com/web web.xsd">
+    <tc:display-name>Servlet 2.4 application</tc:display-name>
+    <tc:welcome-file-list>
+        <tc:welcome-file>index.html</tc:welcome-file>
+        <tc:welcome-file>index.htm</tc:welcome-file>
+        <tc:welcome-file>index.jsp</tc:welcome-file>
+        <tc:welcome-file>default.html</tc:welcome-file>
+        <tc:welcome-file>default.htm</tc:welcome-file>
+        <tc:welcome-file>default.jsp</tc:welcome-file>
+    </tc:welcome-file-list>
+    <tc:filter>
+        <tc:filter-name>ServletMappedDoFilter_Filter</tc:filter-name>
+        <tc:filter-class>tests.Filter.DoFilter_Filter</tc:filter-class>
+        <tc:init-param>
+            <tc:param-name>attribute</tc:param-name>
+            <tc:param-value>tests.Filter.DoFilter_Filter.SERVLET_MAPPED </tc:param-value>
+        </tc:init-param>
+    </tc:filter>
+    <tc:filter-mapping>
+        <tc:filter-name>ServletMappedDoFilter_Filter</tc:filter-name>
+        <tc:url-pattern>/DoFilterTest</tc:url-pattern>
+        <tc:dispatcher>REQUEST</tc:dispatcher>
+    </tc:filter-mapping>
+    <tc:filter-mapping>
+        <tc:filter-name>ServletMappedDoFilter_Filter</tc:filter-name>
+        <tc:url-pattern>/IncludedServlet</tc:url-pattern>
+        <tc:dispatcher>INCLUDE</tc:dispatcher>
+    </tc:filter-mapping>
+    <tc:filter-mapping>
+        <tc:filter-name>ServletMappedDoFilter_Filter</tc:filter-name>
+        <tc:url-pattern>ForwardedServlet</tc:url-pattern>
+        <tc:dispatcher>FORWARD</tc:dispatcher>
+    </tc:filter-mapping>
+    <tc:listener>
+        <tc:listener-class>tests.ContextListener</tc:listener-class>
+    </tc:listener>
+    <tc:listener>
+        <tc:listener-class>tests.ServletRequestListener.RequestListener </tc:listener-class>
+    </tc:listener>
+    <tc:servlet>
+        <tc:servlet-name>welcome</tc:servlet-name>
+        <tc:servlet-class>WelcomeServlet</tc:servlet-class>
+    </tc:servlet>
+    <tc:servlet>
+        <tc:servlet-name>ServletErrorPage</tc:servlet-name>
+        <tc:servlet-class>tests.Error.ServletErrorPage</tc:servlet-class>
+    </tc:servlet>
+    <tc:servlet>
+        <tc:servlet-name>IncludedServlet</tc:servlet-name>
+        <tc:servlet-class>tests.Filter.IncludedServlet</tc:servlet-class>
+    </tc:servlet>
+    <tc:servlet>
+        <tc:servlet-name>ForwardedServlet</tc:servlet-name>
+        <tc:servlet-class>tests.Filter.ForwardedServlet</tc:servlet-class>
+    </tc:servlet>
+    <tc:servlet-mapping>
+        <tc:servlet-name>welcome</tc:servlet-name>
+        <tc:url-pattern>/hello.welcome</tc:url-pattern>
+    </tc:servlet-mapping>
+    <tc:servlet-mapping>
+        <tc:servlet-name>ServletErrorPage</tc:servlet-name>
+        <tc:url-pattern>/ServletErrorPage</tc:url-pattern>
+    </tc:servlet-mapping>
+    <tc:servlet-mapping>
+        <tc:servlet-name>IncludedServlet</tc:servlet-name>
+        <tc:url-pattern>/IncludedServlet</tc:url-pattern>
+    </tc:servlet-mapping>
+    <tc:servlet-mapping>
+        <tc:servlet-name>ForwardedServlet</tc:servlet-name>
+        <tc:url-pattern>/ForwardedServlet</tc:url-pattern>
+    </tc:servlet-mapping>
+
+    <tc:error-page>
+        <tc:error-code>404</tc:error-code>
+        <tc:location>/error404.html</tc:location>
+    </tc:error-page>
+    <tc:error-page>
+        <tc:exception-type>java.lang.ArrayIndexOutOfBoundsException </tc:exception-type>
+        <tc:location>/ServletErrorPage</tc:location>
+    </tc:error-page>
+</tc:web-app>
